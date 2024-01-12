@@ -42,6 +42,19 @@ int search_elem_list(list *l, key_type key)
     return -1;
 }
 
+// this will need the data array to have [MAX + 1] elements allocated
+int sentinel_search(list *l, key_type key)
+{
+    int i = 0;
+    l->data[l->size].key = key; // placing the sentinel element
+    while (l->data[i].key != key)
+        i++;
+    if (i == l->size)
+        return -1;
+    else
+        return i;
+}
+
 bool insert_elem_list(list *l, _register reg, int i)
 {
     if (i < 0 || i > l->size || l->size == MAX)
@@ -64,7 +77,7 @@ bool delete_elem_list(list *l, key_type key)
     return true;
 }
 
-bool restart_list(list *l)
+void restart_list(list *l)
 {
     l->size = 0;
 }
