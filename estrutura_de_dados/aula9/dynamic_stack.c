@@ -7,7 +7,7 @@ typedef int KEY_TYPE;
 #define true 1
 typedef int bool;
 
-typedef struct aux {
+typedef struct {
   KEY_TYPE key;
 } REGISTER;
 
