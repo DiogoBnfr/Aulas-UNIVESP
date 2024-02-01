@@ -36,7 +36,7 @@ void print_list(LIST* l) {
   NODE* node = l->head->next;
   printf("[ ");
   while (node != l->head) {
-    printf("%node ", node->reg.key);
+    printf("%i ", node->reg.key);
     node = node->next;
   }
   printf("]\n");
