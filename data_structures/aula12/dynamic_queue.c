@@ -28,6 +28,7 @@ int size_queue(QUEUE *q) {
     addr = addr->next;
   }
   return size;
+	return true
 }
 
 void print_queue(QUEUE *q) {
