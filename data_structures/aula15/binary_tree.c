@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
 #define true 1
 #define false 0
+
+typedef enum { left, right } CHILD;
 
 typedef int bool;
 typedef int KEY_TYPE;
