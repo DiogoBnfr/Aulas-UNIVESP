@@ -46,6 +46,48 @@ int size(NODE* root) {
 	return size(root->left) + 1 + size(root->right);
 }
 
+NODE* search_prev(NODE* root, KEY_TYPE value) {
+	if (root->left->value == value || root->right->value == value) return root;
+	if (value < root->value) return search_prev(root->left, value);
+	return search_prev(root->right, value);
+}
+
+NODE* delete(NODE* root, KEY_TYPE value) {
+	if (root == NULL) return false;
+
+	NODE* temp_node;
+	NODE* unwanted_node = search(root, value);
+
+	if (value == root->value) {
+		if (root->left == NULL && root->right == NULL) {
+			free(root);
+			return NULL;
+		}
+
+		if (root->right != NULL) root = root->right;
+		else root = root->left;
+		
+		NODE* temp_node = root;
+		while (temp_node->left != NULL) temp_node = temp_node->left;
+		temp_node->left = unwanted_node->left;
+	} else {
+		NODE* prev = search_prev(root, value);
+		
+		int descendents;
+		if (unwanted_node->left == NULL && unwanted_node->right == NULL) {
+			descendents = 0;
+		} else if (unwanted_node->right == NULL && unwanted_node->left != NULL) {
+			descendents = 1;
+		} else if (unwanted_node->left == NULL && unwanted_node->right != NULL) {
+			descendents = 2;
+		} else {
+			descendents = 3;
+		}
+	}
+	free(unwanted_node);
+	return root;
+}
+
 void print(NODE* root) {
 	if (root != NULL) {
 		printf("%d", root->value);
@@ -84,4 +126,7 @@ int main(void) {
 	printf("Contain 89: %b\n", r);
 
 	printf("Size: %d\n", size(tree));
+
+	tree = delete(tree, 23);
+	print(tree);
 } 
