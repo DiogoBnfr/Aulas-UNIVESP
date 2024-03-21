@@ -60,14 +60,11 @@ NODE *search_prev(NODE *root, KEY_TYPE value) {
 NODE *delete(NODE *root, KEY_TYPE value) {
   if (root == NULL)
     return root;
-
   NODE *node = search(root, value);
   if (node == NULL)
     return root;
-
   NODE *parent = search_prev(root, value);
   NODE *x, *y;
-
   if (!node->left || !node->right) {
     if (!node->left)
       y = node->right;
@@ -130,7 +127,6 @@ void print(NODE *root) {
 
 int main(void) {
   NODE *tree = new_tree();
-
   tree = insert(tree, 15);
   tree = insert(tree, 20);
   tree = insert(tree, 23);
@@ -138,31 +134,25 @@ int main(void) {
   tree = insert(tree, 8);
   tree = insert(tree, 3);
   tree = insert(tree, 12);
-
   print(tree);
   printf("\n");
-
   bool r;
   if (search(tree, 23))
     r = true;
   else
     r = false;
   printf("Contain 23: %b\n", r);
-
   if (search(tree, 99))
     r = true;
   else
     r = false;
   printf("Contain 99: %b\n", r);
-
   if (search(tree, 89))
     r = true;
   else
     r = false;
   printf("Contain 89: %b\n", r);
-
   printf("Size: %d\n", size(tree));
-
   tree = delete (tree, 23);
   print(tree);
   printf("\n");
